@@ -4,27 +4,28 @@ function solve() {
     0: 2,
     1: 2,
     2: 2
-  }
+  };
 
   document.addEventListener("click", selectAnswer);
 
-  function selectAnswer(){
+  function selectAnswer() {
+    debugger;
+    let answers = document.getElementsByClassName("answer-wrap");
 
     let quizSections = document.getElementsByTagName("section");
 
-    let hidden = quizSections.indexOf(hidden);
+    let index;
+    
+    [...quizSections].forEach((item, i) => {
+      if (!item.classList.contains("hidden")) {
+        index = i;
+      }
+    });
 
-    let answers;
-    isanswerCorrect()
+    function isAnswerCorrect()
     {
-      
-  
-      quizSections.array.forEach(x => x.quizSections.hidden = true);
-  
-       
+      let section = quizSections[hidden];
     }
+
   }
-
-
-
 }
