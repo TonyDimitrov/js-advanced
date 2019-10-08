@@ -1,11 +1,10 @@
+var playerScore = 0
+
 function solve() {
 
   let answerDiv = document.querySelector('.answer-wrap');
-  debugger;
 
   answerDiv.addEventListener("click", answerHandler, false);
-
-
 
   function answerHandler(arg) {
 
@@ -14,12 +13,17 @@ function solve() {
       1: 4,
       2: 2
     };
-    let activeSectionIndex = getActiveSection();
+    let sectionsObject = getActiveSection();
 
-    let correctAnswer = correctAnswers[activeSectionIndex];
+    let correctAnswer = correctAnswers[sectionsObject.currentIndexSection];
 
     let isCorrect = isAnswerCorrect(arg, correctAnswer);
+    if (isCorrect) {
+      playerScore++;
+      console.log(playerScore);
+    }
 
+   // questionIterator(sectionsObject);
 
     function getActiveSection() {
       let quizSections = document.getElementsByTagName("section");
@@ -30,12 +34,12 @@ function solve() {
         }
       });
 
-      return currentQuestion;
+      return { sections: [quizSections], currentIndexSection: [currentQuestion]};
     }
 
     function isAnswerCorrect(arg, correctAnswer) {
 
-      var parent = arg.currentTarget.parentElement.parentElement;
+      var parent = arg.currentTarget.parentElement;
       let answerValue = Number(parent.getAttribute("data-quizIndex"));
 
       if (correctAnswer == answerValue) {
