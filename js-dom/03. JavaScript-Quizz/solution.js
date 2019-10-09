@@ -23,7 +23,20 @@ function solve() {
       console.log(playerScore);
     }
 
-   // questionIterator(sectionsObject);
+    questionIterator(sectionsObject);
+
+    function questionIterator(sectionsObject) {
+
+      if (sectionsObject.currentIndexSection == sectionsObject.sections.length - 1) {
+
+        let section = sectionsObject.sections[sectionsObject.currentIndexSection];
+
+        sectionsObject.sections[sectionsObject.currentIndexSection + 1].className.remove("hidden")
+
+      } else {
+        sectionsObject.sections.forEach(x => x.classList.add("hidden"));
+      }
+    }
 
     function getActiveSection() {
       let quizSections = document.getElementsByTagName("section");
@@ -33,8 +46,10 @@ function solve() {
           currentQuestion = i;
         }
       });
-
-      return { sections: [quizSections], currentIndexSection: [currentQuestion]};
+      let obj = { sections: [], currentIndexSection: [currentQuestion] };
+      
+      [...quizSections].forEach(s => obj.sections.push(s));
+      return obj;
     }
 
     function isAnswerCorrect(arg, correctAnswer) {
