@@ -2,12 +2,14 @@ var playerScore = 0
 
 function solve() {
 
-  let answerDiv = document.querySelector('.answer-wrap');
+  let questionDivCollection = document.querySelectorAll('.answer-wrap');
 
-  answerDiv.addEventListener("click", answerHandler, false);
+  for (const div of questionDivCollection) {
+    div.addEventListener("click", answerHandler, false);
+  }
+
 
   function answerHandler(arg) {
-
     const correctAnswers = {
       0: 2,
       1: 4,
@@ -23,32 +25,43 @@ function solve() {
       console.log(playerScore);
     }
 
-    questionIterator(sectionsObject);
+    questionIterator(sectionsObject, playerScore);
 
-    function questionIterator(sectionsObject) {
+    function questionIterator(sectionsObject, playerScore) {
 
-      if (sectionsObject.currentIndexSection == sectionsObject.sections.length - 1) {
+      if (sectionsObject.currentIndexSection < sectionsObject.sections.length - 1) {
 
         let section = sectionsObject.sections[sectionsObject.currentIndexSection];
-
-        sectionsObject.sections[sectionsObject.currentIndexSection + 1].className.remove("hidden")
+        section.classList.add("hidden");
+        sectionsObject.sections[sectionsObject.currentIndexSection + 1].classList.remove("hidden")
 
       } else {
         sectionsObject.sections.forEach(x => x.classList.add("hidden"));
+        displayScore(sectionsObject, playerScore);
       }
+    }
+
+    function displayScore(sectionsObject, playerScore) {
+      console.log(document.querySelector(".results-inner"));
+      console.log(document.querySelector(".results-inner > h1").textContent = "toni");
+      sectionsObject.sections.length == playerScore ? document.querySelector(".results-inner > h1").innerHTML = "You are recognized as top JavaScript fan!"
+        : document.querySelector(".results-inner > h1").innerHTML = "You have {rightAnswers} right answers";
     }
 
     function getActiveSection() {
       let quizSections = document.getElementsByTagName("section");
+      let toArrquizSections = Array.from(quizSections);
+
       let currentQuestion;
       [...quizSections].forEach((item, i) => {
         if (!item.classList.contains("hidden")) {
           currentQuestion = i;
         }
       });
-      let obj = { sections: [], currentIndexSection: [currentQuestion] };
-      
-      [...quizSections].forEach(s => obj.sections.push(s));
+      let obj = { sections: [], currentIndexSection: 0 };
+
+      obj.sections = toArrquizSections; //forEach(s => obj.sections.push(s));
+      obj.currentIndexSection = currentQuestion;
       return obj;
     }
 
