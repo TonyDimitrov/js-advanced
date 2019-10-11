@@ -1,6 +1,8 @@
-var playerScore = 0
+
 
 function solve() {
+  
+  var playerScore = 0
 
   let questionDivCollection = document.querySelectorAll('.answer-wrap');
 
@@ -42,10 +44,12 @@ function solve() {
     }
 
     function displayScore(sectionsObject, playerScore) {
-      console.log(document.querySelector(".results-inner"));
-      console.log(document.querySelector(".results-inner > h1").textContent = "toni");
+ 
       sectionsObject.sections.length == playerScore ? document.querySelector(".results-inner > h1").innerHTML = "You are recognized as top JavaScript fan!"
-        : document.querySelector(".results-inner > h1").innerHTML = "You have {rightAnswers} right answers";
+        : document.querySelector(".results-inner > h1").innerHTML = `You have ${playerScore} right answers`;
+
+        console.log(document.querySelector("ul#results"));
+        document.querySelector("ul#results").style.display = "block";
     }
 
     function getActiveSection() {
@@ -60,7 +64,7 @@ function solve() {
       });
       let obj = { sections: [], currentIndexSection: 0 };
 
-      obj.sections = toArrquizSections; //forEach(s => obj.sections.push(s));
+      obj.sections = toArrquizSections;
       obj.currentIndexSection = currentQuestion;
       return obj;
     }
