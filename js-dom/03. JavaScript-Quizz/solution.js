@@ -1,5 +1,4 @@
 
-
 function solve() {
   
   var playerScore = 0
@@ -9,7 +8,6 @@ function solve() {
   for (const div of questionDivCollection) {
     div.addEventListener("click", answerHandler, false);
   }
-
 
   function answerHandler(arg) {
     const correctAnswers = {
@@ -35,10 +33,12 @@ function solve() {
 
         let section = sectionsObject.sections[sectionsObject.currentIndexSection];
         section.classList.add("hidden");
-        sectionsObject.sections[sectionsObject.currentIndexSection + 1].classList.remove("hidden")
+
+      sectionsObject.sections[sectionsObject.currentIndexSection + 1].classList.add("hidden");
+        sectionsObject.sections[sectionsObject.currentIndexSection + 1].style.display = "block"; //.classList.remove("hidden");        
 
       } else {
-        sectionsObject.sections.forEach(x => x.classList.add("hidden"));
+        sectionsObject.sections.forEach(x => x.style.display = "hidden");
         displayScore(sectionsObject, playerScore);
       }
     }
@@ -58,7 +58,7 @@ function solve() {
 
       let currentQuestion;
       [...quizSections].forEach((item, i) => {
-        if (!item.classList.contains("hidden")) {
+        if (!item.classList.contains("hidden") || item.style.display == "block") {
           currentQuestion = i;
         }
       });
