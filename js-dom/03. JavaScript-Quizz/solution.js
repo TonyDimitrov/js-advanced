@@ -1,31 +1,3 @@
-unesc();
-
-function unesc(){
-
-let  json = JSON.parse(`{
-  "namespace": "RiskFirst/Asset Management/Dividends",
-  "name": "Dividends",
-  "configuration":
-   "{\"IsFixedLength\":false,\"Columns\":
-   [{\"Name\":\"PRODUCT_CODE_RIC\",\"Length\":0},
-   {\"Name\":\"PRODUCT_CODE_ISIN\",\"Length\":0},
-   {\"Name\":\"Name\",\"Length\":0},
-   {\"Name\":\"Currency\",\"Length\":0},
-   {\"Name\":\"Frequency\",\"Length\":0},
-   {\"Name\":\"Last_12M\",\"Length\":0},
-   {\"Name\":\"Last_Payment_Date\",\"Length\":0},
-   {\"Name\":\"Ex_Div_Date\",\"Length\":0},
-   {\"Name\":\"Last_Div_Share\",\"Length\":0},
-   {\"Name\":\"Last_Declared_Date\",\"Length\":0},
-   {\"Name\":\"Source\",\"Length\":0},
-   {\"Name\":\"Valuation_Date\",\"Length\":0}],
-   \"ColumnDelimiter\":\",\",\"RowDelimiter\":\"<CR><LF>\",
-   \"SkipHeaderRows\":1,
-   \"EncodingCodePage\":65001,
-   \"FileNameColumn\":\"FileName\"}",
-  "dataSourceType": "FlatFile"
-}`);
-}
 
 function solve() {
   
@@ -60,10 +32,8 @@ function solve() {
       if (sectionsObject.currentIndexSection < sectionsObject.sections.length - 1) {
 
         let section = sectionsObject.sections[sectionsObject.currentIndexSection];
-    //    section.classList.add("hidden");
-
-  //    sectionsObject.sections[sectionsObject.currentIndexSection + 1].classList.add("hidden");
-        sectionsObject.sections[sectionsObject.currentIndexSection + 1].style.display = "block"; //.classList.remove("hidden");        
+        section.style.display = "none";
+        sectionsObject.sections[sectionsObject.currentIndexSection + 1].style.display = "block"; 
 
       } else {
         sectionsObject.sections.forEach(x => x.style.display = "none");
@@ -84,10 +54,15 @@ function solve() {
       let quizSections = document.getElementsByTagName("section");
       let toArrquizSections = Array.from(quizSections);
 
+      console.log(toArrquizSections[2].style.display);
+
       toArrquizSections.forEach((item)=> {
         if (!item.classList.contains("hidden")) {
           item.classList.add("hidden");
           item.style.display = "block";
+        }
+        else if(item.style.display === ""){
+          item.style.display = "none";
         }
       }) ;
 
