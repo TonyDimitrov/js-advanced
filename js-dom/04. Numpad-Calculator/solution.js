@@ -1,6 +1,6 @@
 
 function solve() {
-
+"use strick";
     const calcByOperator = new Map();
     calcByOperator.set("+", (a, b) => a + b);
     calcByOperator.set("-", (a, b) => a - b);
@@ -26,65 +26,66 @@ function solve() {
         let output = document.querySelector("#expressionOutput");
         let resultOutput = document.querySelector("#resultOutput");
 
-        let test = document.querySelector("button[value='1']");
-
-        btns.forEach(b => b.addEventListener("click", getValue))
+        Array.from(btns).forEach(b => b.addEventListener("click", getValue))
 
         function getValue(args) {
             let setInput = handleInput(args, calcInput);
             visualizeExpression(setInput, output, resultOutput, calcByOperator);
         }
-    }
 
-    function handleInput(args, calcInput) {
+        function handleInput(args, calcInput) {
 
-        let val = args.currentTarget.value;
-
-        if (clear === val) {
-            calcInput.clear = true;
-        }
-        else {
-            if (Number.isInteger(Number(val))) {
-                var len = calcInput.expression.length;
-                if (len === 0) {
-                    calcInput.expression.push(val);
-                } else if (Number.isInteger(Number(calcInput.expression[len - 1]))) {
-                    calcInput.expression[len - 1] += val;
-                } else {
+            let val = args.currentTarget.value;
+    
+            if (clear === val) {
+                calcInput.clear = true;
+            }
+            else {
+                if (Number.isInteger(Number(val)) || val === '.') {
+                    var len = calcInput.expression.length;
+                    if (len === 0) {
+                        calcInput.expression.push(val);
+                    } else if (Number.isInteger(Number(calcInput.expression[len - 1])) || calcInput.expression[len - 1].includes('.')) {
+                        calcInput.expression[len - 1] += val;
+                    } else {
+                        calcInput.expression.push(val);
+                    }
+                } else if (val === equal) {
+                    calcInput.equal = true;
+                } else if (calcInput.expression.length > 0) {
                     calcInput.expression.push(val);
                 }
-            } else if (val === equal) {
-                calcInput.equal = true;
-            } else if (calcInput.expression.length > 0) {
-                calcInput.expression.push(val);
+            }
+    
+            return calcInput;
+        }
+    
+        function visualizeExpression(setInput, output, resultOutput, calcByOperator) {
+            if (setInput.clear) {
+                output.innerHTML = "";
+                resultOutput.innerHTML = "";
+                setInput.clear = false;
+                setInput.expression.length = 0;
+            } else if (setInput.equal) {
+                resultOutput.innerHTML  = makeCalculation(setInput, calcByOperator);
+                setInput.equal = false;
+            } else {
+                output.innerHTML = setInput.expression.join(" ");
             }
         }
-
-        return calcInput;
-    }
-
-    function visualizeExpression(setInput, output, resultOutput, calcByOperator) {
-        if (setInput.clear) {
-            output.innerText = "";
-            resultOutput.innerText = "";
-            setInput.clear = false;
-            setInput.expression.length = 0;
-        } else if (setInput.equal) {
-            resultOutput.innerText = makeCalculation(setInput, calcByOperator);
-            setInput.equal = false;
-        } else {
-            output.innerText = setInput.expression.join(" ");
+    
+        function makeCalculation(setInput, calcByOperator) {
+            let total = "";
+            let expr = setInput.expression;
+            // if (expr[expr.length-1]. ) {
+                
+            // }
+            for (let index = 1; index < expr.length; index += 2) {
+                total += calcByOperator.get(expr[index])(+expr[index - 1], +expr[index + 1]);
+            }
+    
+            return total;
         }
-    }
-
-    function makeCalculation(setInput, calcByOperator) {
-        let total = 0;
-        let expr = setInput.expression;
-        for (let index = 1; index < expr.length; index += 2) {
-            total += calcByOperator.get(expr[index])(+expr[index - 1], +expr[index + 1]);
-        }
-
-        return total;
     }
 }
 
