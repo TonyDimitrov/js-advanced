@@ -1,6 +1,6 @@
 
 function solve() {
-"use strick";
+"use strict";
     const calcByOperator = new Map();
     calcByOperator.set("+", (a, b) => a + b);
     calcByOperator.set("-", (a, b) => a - b);
@@ -77,9 +77,6 @@ function solve() {
         function makeCalculation(setInput, calcByOperator) {
             let total = "";
             let expr = setInput.expression;
-            // if (expr[expr.length-1]. ) {
-                
-            // }
             for (let index = 1; index < expr.length; index += 2) {
                 total += calcByOperator.get(expr[index])(+expr[index - 1], +expr[index + 1]);
             }
