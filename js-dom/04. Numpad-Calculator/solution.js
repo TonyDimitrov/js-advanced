@@ -1,5 +1,7 @@
 
 function solve() {
+    
+"use strict"
 
     const calcByOperator = new Map();
     calcByOperator.set("+", (a, b) => a + b);
@@ -28,7 +30,7 @@ function solve() {
 
         let test = document.querySelector("button[value='1']");
 
-        btns.forEach(b => b.addEventListener("click", getValue))
+        btns.forEach(b => b.addEventListener("click", getValue));
 
         function getValue(args) {
             let setInput = handleInput(args, calcInput);
