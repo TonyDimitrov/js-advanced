@@ -1,0 +1,26 @@
+{
+  "name": "unit-tests",
+  "version": "1.0.0",
+  "description": "unit tests exercising",
+  "main": "string-builder.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "https://github.com/TonyDimitrov/js-advanced"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TonyDimitrov/js-advanced.git"
+  },
+  "author": "Toni Dimitrov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TonyDimitrov/js-advanced/issues"
+  },
+  "homepage": "https://github.com/TonyDimitrov/js-advanced#readme",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2"
+  }
+}
