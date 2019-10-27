@@ -91,37 +91,32 @@ describe('StringBuilder', function(){
 
     it("Argument must be a string", function(){
         
-        expect(() => StringBuilder(25)).to.throw();
+        expect(() => new StringBuilder(25)).to.throw(TypeError, 'Argument must be string');
     });
 
     it("Argument must be a string", function(){
         
-        expect(() => StringBuilder()).to.throw();
-    });
-
-    it("Argument must be a string", function(){
-        
-        expect(() => StringBuilder(undefined)).to.throw();
+        expect(() => new StringBuilder()._stringArray).to.have.lengthOf(0);
     });
 
     it("Argument must be a string", function(){
         let instance = new StringBuilder("Test");        
-        expect(() => instance.append(25)).to.throw();
+        expect(() => instance.append(25)).to.throw(TypeError, 'Argument must be string');
     });
 
     it("Argument must be a string", function(){
         let instance = new StringBuilder("Test");        
-        expect(() => instance.prepend(25)).to.throw();
+        expect(() => instance.prepend(25)).to.throw(TypeError, 'Argument must be string');
     });
 
     it("Argument must be a string", function(){
         let instance = new StringBuilder("Test");        
-        expect(() => instance.insertAt(25, 7)).to.throw();
+        expect(() => instance.insertAt(25, 7)).to.throw(TypeError, 'Argument must be string');
     });
 
     it("Argument must be a string", function(){
         let instance = new StringBuilder("Test");        
-        expect(() => StringBuilder._vrfyParam(25)).to.throw();
+        expect(() => StringBuilder._vrfyParam(25)).to.throw(TypeError, 'Argument must be string');
     });
 
     it("Functions attached to instance", function(){
